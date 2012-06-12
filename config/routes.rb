@@ -1,4 +1,6 @@
 SampleApp::Application.routes.draw do
+  resources :users
+
   root to: 'static_pages#home'
   
   match '/', to: 'static_pages#home'
@@ -15,7 +17,7 @@ SampleApp::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
   #get "static_pages/contact"
 
-  get "users/new"
+  #get "users/new" WAS REMOVED BECAUSE users => new IS AVAILABLE IN resources :users ADDING
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
