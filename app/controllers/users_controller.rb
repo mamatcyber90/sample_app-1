@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_filter :admin_user, only: :destroy
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
@@ -23,6 +24,9 @@ class UsersController < ApplicationController
   end
 
   def edit
+    #unless signed_in?
+    #  redirect_to(root_path)
+    #end
   end
 
   def index
@@ -40,9 +44,20 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed"
-    redirect_to users_path
+    #puts User.find(params[:id]).id
+    #puts User.find(params[:id]).admin
+    #puts current_user.admin?
+    #if User.find(params[:id]).admin && current_user.admin?
+      #puts "An admin user can not destroy another admin user"
+      #flash[:success] = "An admin user can not destroy another admin user"
+      #sign_in @user
+      #redirect_to @user
+    #else
+      #puts "DESTROY"
+      User.find(params[:id]).destroy
+      flash[:success] = "User destroyed"
+      redirect_to users_path
+    #end
   end
 
   private
