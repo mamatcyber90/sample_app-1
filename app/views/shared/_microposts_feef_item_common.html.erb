@@ -1,0 +1,9 @@
+<span class="content"><%= element.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(element.created_at) %> ago.
+  </span>
+  <% if current_user?(element.user) %>
+    <%= link_to "delete", element, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: element.content %>
+  <% end %>
